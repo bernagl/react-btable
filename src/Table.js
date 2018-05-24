@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 export default class Datatable extends Component {
+  static Td = icon => <td>{icon}</td>
+
   state = {
     selectedCol: 0,
     search: '',
@@ -26,16 +28,14 @@ export default class Datatable extends Component {
     })
   }
 
-  //   onSearch = () => {
-  //     const { data, search, selectedCol } = this.state
-  //     this.setState(({ data, search, selectedCol }) => {
-  //       const { key } = data[selectedCol]
-
-  //     })
-  //   }
-
   render() {
-    const { columns, data: d } = this.props
+    const {
+      columns,
+      data: d,
+      handleDelete,
+      handleEdit,
+      handleView
+    } = this.props
     const { result, selectedCol } = this.state
     const data = result ? result : d
     // console.log(this.state)
@@ -71,7 +71,11 @@ export default class Datatable extends Component {
           <tbody>
             {data.map((element, i) => (
               <tr key={i}>
-                {columns.map(({ key }, j) => <td key={j}>{element[key]}</td>)}
+                {columns.map(({ key, Render }, j) => (
+                  <td key={j}>
+                    {Render ? <Render {...element} /> : element[key]}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
