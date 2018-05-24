@@ -10,12 +10,97 @@ const data = [
     edad: 23
   },
   {
-    nombre: 'Berna',
+    nombre: 'Berfgfzdhna',
+    apellido: 'Gafhfhrcía',
+    edad: 23
+  },
+  {
+    nombre: 'Berfhfhfh∑na',
     apellido: 'García',
     edad: 23
   },
   {
-    nombre: 'Bebo',
+    nombre: 'Bersdg<dgzna',
+    apellido: 'Garfhfhcía',
+    edad: 23
+  },
+  {
+    nombre: 'Berfhzfhna',
+    apellido: 'Gafhzfhrcía',
+    edad: 23
+  },
+  {
+    nombre: 'Berna',
+    apellido: 'Gfhfhfarcía',
+    edad: 23
+  },
+  {
+    nombre: 'Berna',
+    apellido: 'Gzfhfzhzfarcía',
+    edad: 23
+  },
+  {
+    nombre: 'Berfhzfhfhna',
+    apellido: 'Gfhzfdharcía',
+    edad: 23
+  },
+  {
+    nombre: 'Berzfhdfhfna',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'Bernssda',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'Bersdsdna',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'Besdasdfrna',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'Befgdfgarna',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'Berasgdgna',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'dgadsgadsg',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'dsgadg',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'gasdglk',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'jxfgkgj',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'Behzdfzfhrna',
+    apellido: 'García',
+    edad: 23
+  },
+  {
+    nombre: 'shzfhfhzfdh',
     apellido: 'García',
     edad: 23
   }
@@ -55,7 +140,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hola</h1>
-        <Table columns={columns} data={data} />
+        <Table columns={columns} data={data} pagination={6}/>
       </div>
     )
   }

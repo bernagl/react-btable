@@ -6,10 +6,18 @@ export default class Datatable extends Component {
   state = {
     selectedCol: 0,
     search: '',
-    result: null
+    result: null,
+    currentPage: 0,
+    pages: 0
+  }
+
+  componentDidMount() {
+    const { data, pagination } = this.props
+    this.setState(() => ({ pages: Math.ceil(data.length / pagination) }))
   }
 
   setSelectedCol = selectedCol => {
+    this.setSearchText()
     this.setState({ selectedCol })
   }
 
@@ -28,6 +36,11 @@ export default class Datatable extends Component {
     })
   }
 
+  //   Todo
+  handlePaginate = index => {
+    this.setState(state => {})
+  }
+
   render() {
     const {
       columns,
@@ -38,7 +51,8 @@ export default class Datatable extends Component {
     } = this.props
     const { result, selectedCol } = this.state
     const data = result ? result : d
-    // console.log(this.state)
+    console.log(this.state)
+    console.log(data)
     return (
       <div id="datatable">
         <div className="table-header">
@@ -69,6 +83,15 @@ export default class Datatable extends Component {
             </tr>
           </thead>
           <tbody>
+            {/* {data.map((element, i) => (
+              <tr key={i}>
+                {columns.map(({ key, Render }, j) => (
+                  <td key={j}>
+                    {Render ? <Render {...element} /> : element[key]}
+                  </td>
+                ))}
+              </tr>
+            ))} */}
             {data.map((element, i) => (
               <tr key={i}>
                 {columns.map(({ key, Render }, j) => (
