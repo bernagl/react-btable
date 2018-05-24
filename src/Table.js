@@ -17,7 +17,10 @@ export default class Datatable extends Component {
       const { key } = columns[selectedCol]
       return {
         result: search
-          ? data.filter(element => element[key].search(search) >= 0 && element)
+          ? data.filter(
+              element =>
+                element[key].toLowerCase().search(search) >= 0 && element
+            )
           : null
       }
     })
@@ -48,14 +51,15 @@ export default class Datatable extends Component {
                 <React.Fragment>
                   <th onClick={() => this.setSelectedCol(i)}>
                     <div>
-                      {i}
-                      {col.label}
+                      <span>{col.label}</span>
+                      <br />
                       {selectedCol === i && (
                         <input
                           type="text"
                           onChange={({ target: { value } }) =>
                             this.setSearchText(value)
                           }
+                          className="show-search-input"
                         />
                       )}
                     </div>

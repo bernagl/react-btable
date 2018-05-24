@@ -1,28 +1,32 @@
-.App {
-  text-align: center;
+/* Datatable */
+
+table {
+  border-collapse: collapse;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+th,
+td {
+  padding: 15px;
+  text-align: left;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+table,
+th,
+td {
+  border: 1px solid black;
 }
 
-.App-title {
-  font-size: 1.5em;
+.show-search-input {
+  border: 1px solid red;
+  animation: show-search-input;
+  animation-duration: 1s;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes show-search-input {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
