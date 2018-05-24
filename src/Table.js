@@ -63,7 +63,9 @@ export default class Datatable extends Component {
             <tr>
               {columns.map((col, i) => (
                 <React.Fragment>
-                  <th onClick={() => this.setSelectedCol(i)}>
+                  <th
+                    onClick={!col.Render ? () => this.setSelectedCol(i) : null}
+                  >
                     <div>
                       <span>{col.label}</span>
                       <br />
