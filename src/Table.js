@@ -17,21 +17,51 @@ export default class Datatable extends Component {
   }
 
   setSelectedCol = selectedCol => {
-    this.setSearchText()
+    this.searchByColum()
     this.setState({ selectedCol })
   }
 
-  setSearchText = search => {
+  //   setSearchText = search => {
+  //     const { columns, data } = this.props
+  //     this.setState(({ selectedCol }) => {
+  //       const { key } = columns[selectedCol]
+  //       return {
+  //         result: search
+  //           ? data.filter(
+  //               element =>
+  //                 element[key].toLowerCase().search(search) >= 0 && element
+  //             )
+  //           : null
+  //       }
+  //     })
+  //   }
+
+  globalSearch = text => {
+    const { columns, data } = this.props
+    this.setState(state => {
+      return {
+        result: data.filter(
+          element =>
+            JSON.stringify(element)
+              .toLowerCase()
+              .search(text) >= 0 && element
+        ),
+        search: '',
+      }
+    })
+  }
+
+  searchByColum = text => {
     const { columns, data } = this.props
     this.setState(({ selectedCol }) => {
       const { key } = columns[selectedCol]
       return {
-        result: search
+        result: text
           ? data.filter(
-              element =>
-                element[key].toLowerCase().search(search) >= 0 && element
+              element => element[key].toLowerCase().search(text) >= 0 && element
             )
-          : null
+          : null,
+        search: text
       }
     })
   }
@@ -49,13 +79,18 @@ export default class Datatable extends Component {
       handleEdit,
       handleView
     } = this.props
-    const { result, selectedCol } = this.state
+    const { result, search, selectedCol } = this.state
     const data = result ? result : d
     console.log(this.state)
     console.log(data)
     return (
       <div id="datatable">
         <div className="table-header">
+          <input
+            type="text"
+            onChange={({ target: { value } }) => this.globalSearch(value)}
+            className="show-search-input"
+          />
           <button onClick={this.onSearch}>b</button>
         </div>
         <table>
@@ -72,8 +107,9 @@ export default class Datatable extends Component {
                       {selectedCol === i && (
                         <input
                           type="text"
+                          value={search}
                           onChange={({ target: { value } }) =>
-                            this.setSearchText(value)
+                            this.searchByColum(value)
                           }
                           className="show-search-input"
                         />

@@ -6,7 +6,7 @@ import Table from './Table'
 const data = [
   {
     nombre: 'Luis',
-    apellido: 'García',
+    apellido: 'Garci skanksnaknsa',
     edad: 23
   },
   {
