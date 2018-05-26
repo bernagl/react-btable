@@ -5,16 +5,17 @@ export default class Datatable extends Component {
 
   state = {
     selectedCol: 0,
+    // index: 1,
     search: '',
     result: null,
-    currentPage: 0,
+    currentPage: 1,
     pages: 0
   }
 
-  componentDidMount() {
-    const { data, pagination } = this.props
-    this.setState(() => ({ pages: Math.ceil(data.length / pagination) }))
-  }
+  // componentDidMount() {
+  //   const { data, pagination } = this.props
+  //   this.setState(() => ({ pages: Math.ceil(data.length / pagination) }))
+  // }
 
   setSelectedCol = selectedCol => {
     this.searchByColum()
@@ -46,7 +47,7 @@ export default class Datatable extends Component {
               .toLowerCase()
               .search(text) >= 0 && element
         ),
-        search: '',
+        search: ''
       }
     })
   }
@@ -67,8 +68,8 @@ export default class Datatable extends Component {
   }
 
   //   Todo
-  handlePaginate = index => {
-    this.setState(state => {})
+  handlePaginate = currentPage => {
+    this.setState({ currentPage })
   }
 
   render() {
@@ -77,12 +78,16 @@ export default class Datatable extends Component {
       data: d,
       handleDelete,
       handleEdit,
-      handleView
+      handleView,
+      pagination
     } = this.props
-    const { result, search, selectedCol } = this.state
+    const { currentPage, result, search, selectedCol } = this.state
     const data = result ? result : d
-    console.log(this.state)
-    console.log(data)
+
+    const pages = Math.ceil(data.length / pagination)
+    const start = pagination * (currentPage === 1 ? 0 : currentPage - 1)
+    const end = pagination * currentPage
+    const currentData = data.slice(start, end)
     return (
       <div id="datatable">
         <div className="table-header">
@@ -130,7 +135,7 @@ export default class Datatable extends Component {
                 ))}
               </tr>
             ))} */}
-            {data.map((element, i) => (
+            {currentData.map((element, i) => (
               <tr key={i}>
                 {columns.map(({ key, Render }, j) => (
                   <td key={j}>
@@ -141,6 +146,11 @@ export default class Datatable extends Component {
             ))}
           </tbody>
         </table>
+        <div className="pagination">
+          {Array.from({ length: pages }, (item, i) => (
+            <button onClick={() => this.handlePaginate(i + 1)}>{i + 1}</button>
+          ))}
+        </div>
       </div>
     )
   }
