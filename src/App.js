@@ -141,7 +141,6 @@ class App extends Component {
     const d = generator(10000)
     return (
       <div className="App">
-        <h1>Hola</h1>
         <Table columns={columns} data={d} pagination={100} />
       </div>
     )

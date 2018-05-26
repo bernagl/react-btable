@@ -12,10 +12,10 @@ export default class Datatable extends Component {
     pages: 0
   }
 
-  // componentDidMount() {
-  //   const { data, pagination } = this.props
-  //   this.setState(() => ({ pages: Math.ceil(data.length / pagination) }))
-  // }
+  componentDidMount() {
+    const { data, pagination } = this.props
+    this.setState(() => ({ pages: Math.ceil(data.length / pagination) }))
+  }
 
   setSelectedCol = selectedCol => {
     this.searchByColum()
@@ -68,8 +68,16 @@ export default class Datatable extends Component {
   }
 
   //   Todo
+  // handleInputPaginate = value => {
+  //   this.setState({ currentPage: value })
+  // }
+
   handlePaginate = currentPage => {
-    this.setState({ currentPage })
+    this.setState(({ pages, currentPage: cp }) => {
+      return {
+        currentPage: currentPage <= pages ? currentPage : pages
+      }
+    })
   }
 
   render() {
@@ -83,19 +91,19 @@ export default class Datatable extends Component {
     } = this.props
     const { currentPage, result, search, selectedCol } = this.state
     const data = result ? result : d
-
+    const cp = currentPage ? currentPage : 1
     const pages = Math.ceil(data.length / pagination)
-    const start = pagination * (currentPage === 1 ? 0 : currentPage - 1)
-    const end = pagination * currentPage
+    const start = pagination * (cp === 1 ? 0 : cp - 1)
+    const end = pagination * cp
     const currentData = data.slice(start, end)
-    console.log(currentData)
+    console.log(start, end)
     return (
       <div id="btable">
         <div className="table-header">
           <input
             type="text"
             onChange={({ target: { value } }) => this.globalSearch(value)}
-            className="show-search-input"
+            className="global-search-input"
           />
           <button onClick={this.onSearch}>b</button>
         </div>
@@ -154,14 +162,22 @@ export default class Datatable extends Component {
           >
             {'<'}
           </button>
-          {Array.from({ length: pages }, (item, i) => (
+          {/* {Array.from({ length: pages }, (item, i) => (
             <button
               onClick={() => this.handlePaginate(i + 1)}
               disabled={currentPage === i + 1 ? true : false}
             >
               {i + 1}
             </button>
-          ))}
+          ))} */}
+          <input
+            type="number"
+            value={currentPage}
+            min="1"
+            max={pages}
+            onChange={({ target: { value } }) => this.handlePaginate(value)}
+          />
+          <span>of {pages}</span>
           <button
             onClick={() => this.handlePaginate(currentPage + 1)}
             disabled={currentPage >= pages ? true : false}

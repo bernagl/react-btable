@@ -2,6 +2,7 @@
 
 /* #btable {
 } */
+
 .App {
   max-width: 860px;
   margin: auto;
@@ -9,6 +10,7 @@
   justify-content: center;
   align-content: center;
 }
+
 #btable table {
   border-collapse: collapse;
   width: 100%;
@@ -30,13 +32,13 @@ td {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.show-search-input {
-  border: 1px solid red;
-  animation: show-search-input;
+.global-search-input {
+  float: right;
+  animation: global-search-input;
   animation-duration: 1s;
 }
 
-@keyframes show-search-input {
+@keyframes global-search-input {
   0% {
     opacity: 0;
   }
@@ -46,6 +48,11 @@ td {
 }
 
 /* Styles */
+
+#btable .table-header {
+  background: #fafafa;
+  padding: 10px;
+}
 
 #btable thead tr {
   background: #fafafa;
@@ -58,4 +65,19 @@ td {
 #btable .row:hover {
   background: #e6f7ff;
   transition: .3s;
+}
+
+#btable tr:nth-child(even) {
+  background-color: #f7fbff;
+}
+
+#btable input {
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  /* transition: .1s; */
+}
+
+#btable input:focus {
+  padding: 5px;
+  outline: 2px solid #e6f7ff;
 }
