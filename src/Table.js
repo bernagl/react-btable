@@ -9,12 +9,18 @@ export default class Datatable extends Component {
     search: '',
     result: null,
     currentPage: 1,
+    searchData: [],
     pages: 0
   }
 
   componentDidMount() {
-    const { data, pagination } = this.props
-    this.setState(() => ({ pages: Math.ceil(data.length / pagination) }))
+    const { columns, data, pagination } = this.props
+    const searchData = data.map(element => {
+      let el = ''
+      columns.map(col => (el += ` ${element[col.key]}`))
+      return el.replace('undefined', '')
+    })
+    this.setState({ pages: Math.ceil(data.length / pagination), searchData })
   }
 
   setSelectedCol = selectedCol => {
@@ -39,15 +45,17 @@ export default class Datatable extends Component {
 
   globalSearch = text => {
     const { columns, data } = this.props
-    this.setState(state => {
-      console.log(data, text)
+    this.setState(({ searchData }) => {
+      const result = []
+      searchData.map((element, i) => {
+        return (
+          JSON.stringify(element)
+            .toLowerCase()
+            .search(text.toLowerCase()) >= 0 && result.push(data[i])
+        )
+      })
       return {
-        result: data.filter(
-          element =>
-            JSON.stringify(element)
-              .toLowerCase()
-              .search(text) >= 0 && element
-        ),
+        result,
         search: '',
         currentPage: 1
       }
@@ -92,13 +100,14 @@ export default class Datatable extends Component {
       pagination
     } = this.props
     const { currentPage, result, search, selectedCol } = this.state
+    console.log(this.state)
     const data = result ? result : d
     const cp = currentPage ? currentPage : 1
     const pages = Math.ceil(data.length / pagination)
     const start = pagination * (cp === 1 ? 0 : cp - 1)
     const end = pagination * cp
     const currentData = data.slice(start, end)
-    console.log(currentData)
+    // console.log(currentData)
     return (
       <div id="btable">
         <div className="table-header">
