@@ -40,6 +40,7 @@ export default class Datatable extends Component {
   globalSearch = text => {
     const { columns, data } = this.props
     this.setState(state => {
+      console.log(data, text)
       return {
         result: data.filter(
           element =>
@@ -47,7 +48,8 @@ export default class Datatable extends Component {
               .toLowerCase()
               .search(text) >= 0 && element
         ),
-        search: ''
+        search: '',
+        currentPage: 1
       }
     })
   }
@@ -96,7 +98,7 @@ export default class Datatable extends Component {
     const start = pagination * (cp === 1 ? 0 : cp - 1)
     const end = pagination * cp
     const currentData = data.slice(start, end)
-    console.log(start, end)
+    console.log(currentData)
     return (
       <div id="btable">
         <div className="table-header">
