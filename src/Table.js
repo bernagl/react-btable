@@ -88,8 +88,9 @@ export default class Datatable extends Component {
     const start = pagination * (currentPage === 1 ? 0 : currentPage - 1)
     const end = pagination * currentPage
     const currentData = data.slice(start, end)
+    console.log(currentData)
     return (
-      <div id="datatable">
+      <div id="btable">
         <div className="table-header">
           <input
             type="text"
@@ -136,7 +137,7 @@ export default class Datatable extends Component {
               </tr>
             ))} */}
             {currentData.map((element, i) => (
-              <tr key={i}>
+              <tr className="row" key={i}>
                 {columns.map(({ key, Render }, j) => (
                   <td key={j}>
                     {Render ? <Render {...element} /> : element[key]}

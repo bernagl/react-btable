@@ -1,19 +1,33 @@
 /* Datatable */
 
-table {
+/* #btable {
+} */
+.App {
+  max-width: 860px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+#btable table {
   border-collapse: collapse;
+  width: 100%;
 }
 
-th,
+#btable th,
 td {
   padding: 15px;
   text-align: left;
 }
 
-table,
+#btable table,
 th,
 td {
-  border: 1px solid black;
+  border-bottom: 1px solid#e8e8e8;
+}
+
+#btable {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .show-search-input {
@@ -29,4 +43,19 @@ td {
   100% {
     opacity: 1;
   }
+}
+
+/* Styles */
+
+#btable thead tr {
+  background: #fafafa;
+}
+
+#btable .row {
+  cursor: pointer;
+}
+
+#btable .row:hover {
+  background: #e6f7ff;
+  transition: .3s;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import Table from './Table'
+import generator from './generator'
 
 const data = [
   {
@@ -137,10 +138,11 @@ class App extends Component {
         )
       }
     ]
+    const d = generator(10000)
     return (
       <div className="App">
         <h1>Hola</h1>
-        <Table columns={columns} data={data} pagination={5}/>
+        <Table columns={columns} data={d} pagination={100} />
       </div>
     )
   }
