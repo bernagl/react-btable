@@ -140,7 +140,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hola</h1>
-        <Table columns={columns} data={data} pagination={19}/>
+        <Table columns={columns} data={data} pagination={5}/>
       </div>
     )
   }
