@@ -148,7 +148,12 @@ export default class Datatable extends Component {
         </table>
         <div className="pagination">
           {Array.from({ length: pages }, (item, i) => (
-            <button onClick={() => this.handlePaginate(i + 1)}>{i + 1}</button>
+            <button
+              onClick={() => this.handlePaginate(i + 1)}
+              disabled={currentPage === i + 1 ? true : false}
+            >
+              {i + 1}
+            </button>
           ))}
         </div>
       </div>
