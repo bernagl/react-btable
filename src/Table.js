@@ -163,7 +163,7 @@ export default class Datatable extends Component {
           ))}
           <button
             onClick={() => this.handlePaginate(currentPage + 1)}
-            disabled={currentPage + 1 >= pagination ? true : false}
+            disabled={currentPage >= pages ? true : false}
           >
             {'>'}
           </button>
