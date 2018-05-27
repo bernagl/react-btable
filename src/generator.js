@@ -5,6 +5,6 @@ export default length => {
   return Array.from({ length }, () => ({
     nombre: namor.generate({ words: 1, numbers: 0 }),
     apellido: namor.generate({ words: 1, numbers: 0 }),
-    edad: Math.floor(Math.random() * 30)
+    edad: Math.floor(Math.random() * 1000)
   }))
 }
