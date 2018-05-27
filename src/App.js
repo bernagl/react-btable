@@ -51,6 +51,16 @@ class App extends Component {
           searchPlaceholder="Search"
           emptyText={() => 'No data found :('}
         />
+        <button
+          onClick={() => {
+            this.setState({ data: [] })
+            setTimeout(() => {
+              this.setState({ data: generator(100) })
+            }, 2000)
+          }}
+        >
+          New data
+        </button>
       </div>
     )
   }
