@@ -186,6 +186,11 @@ table {
   text-align: center;
 }
 
+#btable .loading {
+  padding: 20px;
+  text-align: center;
+}
+
 @keyframes pagination-btn-animation {
   from {
     transform: scale(1.1);

@@ -54,7 +54,6 @@ export default class Datatable extends Component {
   sortColumn = ({ key }, o, i) => {
     const { result: r, order: so, selectedCol: sl } = this.state
     const { data } = this.props
-    // const order = sl ? i === sl && (o === so ? null : o) : o
     const order = sl === i ? (o === so ? null : o) : o
     const result =
       o === so
@@ -99,7 +98,14 @@ export default class Datatable extends Component {
   }
 
   render() {
-    const { columns, EmptyText, searchPlaceholder, title } = this.props
+    const {
+      columns,
+      data,
+      EmptyText,
+      Loading,
+      searchPlaceholder,
+      title
+    } = this.props
     const { currentData, currentPage, pages, selectedCol, order } = this.state
     return (
       <div id="btable">
@@ -154,12 +160,18 @@ export default class Datatable extends Component {
           </tbody>
         </table>
         <div className="footer">
-          {currentData.length <= 0 && (
-            <div className="empty-table">
-              <span>{EmptyText ? <EmptyText /> : 'No data found'}</span>
-            </div>
-          )}
-          {/* {1 > 2 && <span>si es mayor</span>} */}
+          {currentData.length <= 0 &&
+            !Loading && (
+              <div className="empty-table">
+                <span>{EmptyText ? <EmptyText /> : 'No data found'}</span>
+              </div>
+            )}
+          {Loading &&
+            data.length === 0 && (
+              <div className="loading">
+                <Loading />
+              </div>
+            )}
           <div className="pagination">
             <button
               onClick={() => this.handlePaginate(currentPage - 1)}

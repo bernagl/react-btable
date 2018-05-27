@@ -4,10 +4,16 @@ import Table from './Table'
 import generator from './generator'
 
 class App extends Component {
+  state = { data: [] }
   handleClick = ({ name, last_name, age }) => {
     alert(`${name} ${last_name} ${age}`)
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ data: generator(10000) })
+    }, 5000)
+  }
   render() {
     const columns = [
       {
@@ -34,12 +40,13 @@ class App extends Component {
         )
       }
     ]
-    const d = generator(10000)
+
     return (
       <div className="App">
         <Table
           columns={columns}
-          data={d}
+          data={this.state.data}
+          Loading={() => 'Loading'}
           pagination={10}
           searchPlaceholder="Search"
           emptyText={() => 'No data found :('}
