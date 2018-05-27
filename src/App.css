@@ -1,8 +1,5 @@
 /* Datatable */
 
-/* #btable {
-} */
-
 .App {
   max-width: 860px;
   margin: auto;
@@ -60,14 +57,12 @@ td {
   position: relative;
 }
 
-
 #btable .table-header .title {
   margin: 0px;
 }
 
 #btable thead tr {
   background: #fafafa;
-  /* cursor: pointer; */
 }
 
 #btable .row {
@@ -86,7 +81,6 @@ td {
 #btable input {
   padding: 5px;
   border: 1px solid rgba(0, 0, 0, 0);
-  /* transition: .1s; */
 }
 
 #btable input:focus {
@@ -138,7 +132,6 @@ td {
 #btable thead th {
   padding: 0px;
   margin-right: 5px;
-  /* display: flex; */
 }
 
 table {
@@ -190,8 +183,6 @@ table {
 #btable .empty-table {
   padding: 40px;
   position: relative;
-  /* top: 20px;
-  left: 50%; */
   text-align: center;
 }
 
@@ -210,7 +201,6 @@ table {
   }
   to {
     transform: scale(1);
-    /* border-bottom: 8px solid #5298dc; */
   }
 }
 
@@ -220,6 +210,5 @@ table {
   }
   to {
     transform: scale(1);
-    /* border-top: 8px solid #5298dc; */
   }
 }
