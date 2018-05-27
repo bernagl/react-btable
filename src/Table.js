@@ -32,7 +32,7 @@ export default class Datatable extends Component {
   }
 
   globalSearch = text => {
-    const { columns, data } = this.props
+    const { data } = this.props
     const { searchData } = this.state
     const result = []
     searchData.map((element, i) => {
@@ -77,7 +77,7 @@ export default class Datatable extends Component {
 
   stateMiddleware = state => {
     const { data: d, pagination } = this.props
-    const { currentPage, pages, result, search, selectedCol } = this.state
+    const { result } = this.state
     const data = state.result ? state.result : result ? result : d
     const cp = state.currentPage ? state.currentPage : 1
     const p = state.pages ? state.pages : Math.ceil(data.length / pagination)
@@ -88,33 +88,15 @@ export default class Datatable extends Component {
   }
 
   handlePaginate = currentPage => {
-    const { currentPage: cp, pages, result } = this.state
+    const { pages } = this.state
     this.stateMiddleware({
       currentPage: currentPage <= pages ? currentPage : pages
     })
   }
 
   render() {
-    const {
-      columns,
-      data: d,
-      handleDelete,
-      handleEdit,
-      handleView,
-      pagination,
-      emptyText,
-      searchPlaceholder,
-      title
-    } = this.props
-    const {
-      currentData,
-      currentPage,
-      pages,
-      result,
-      search,
-      selectedCol,
-      order
-    } = this.state
+    const { columns, emptyText, searchPlaceholder, title } = this.props
+    const { currentData, currentPage, pages, selectedCol, order } = this.state
     return (
       <div id="btable">
         <div className="table-header">
@@ -130,30 +112,28 @@ export default class Datatable extends Component {
           <thead>
             <tr>
               {columns.map((col, i) => (
-                <React.Fragment>
-                  <th onClick={() => this.setSelectedCol(i)}>
-                    <div className="header-container">
-                      <span>{col.label}</span>
-                      <br />
-                      {col.Render || (
-                        <React.Fragment>
-                          <span
-                            onClick={() => this.sortColumn(col, 'desc')}
-                            className={`caret caret-up ${i === selectedCol &&
-                              order === 'desc' &&
-                              'active'} `}
-                          />
-                          <span
-                            onClick={() => this.sortColumn(col, 'asc')}
-                            className={`caret caret-down ${i === selectedCol &&
-                              order === 'asc' &&
-                              'active'}`}
-                          />
-                        </React.Fragment>
-                      )}
-                    </div>
-                  </th>
-                </React.Fragment>
+                <th onClick={() => this.setSelectedCol(i)}  key={i}>
+                  <div className="header-container">
+                    <span>{col.label}</span>
+                    <br />
+                    {col.Render || (
+                      <React.Fragment>
+                        <span
+                          onClick={() => this.sortColumn(col, 'desc')}
+                          className={`caret caret-up ${i === selectedCol &&
+                            order === 'desc' &&
+                            'active'} `}
+                        />
+                        <span
+                          onClick={() => this.sortColumn(col, 'asc')}
+                          className={`caret caret-down ${i === selectedCol &&
+                            order === 'asc' &&
+                            'active'}`}
+                        />
+                      </React.Fragment>
+                    )}
+                  </div>
+                </th>
               ))}
             </tr>
           </thead>
