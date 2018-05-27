@@ -108,32 +108,32 @@ const data = [
 ]
 
 class App extends Component {
-  handleClick = e => {
-    console.log(e)
+  handleClick = ({ nombre, apellido, edad }) => {
+    alert(`${nombre} ${apellido} ${edad}`)
   }
 
   render() {
     const columns = [
       {
-        label: 'Nombre',
-        key: 'nombre',
+        label: 'Name',
+        key: 'name',
         Render: props => (
           <span className="d" onClick={() => this.handleClick(props)}>
-            {props.nombre}
+            {props.name}
           </span>
         )
       },
       {
-        label: 'Apellido',
-        key: 'apellido'
+        label: 'Last name',
+        key: 'last_name'
       },
-      { label: 'Edad', key: 'edad' },
+      { label: 'Age', key: 'age' },
       {
-        label: 'Acciones',
+        label: 'Actions',
         key: 'actions',
         Render: props => (
           <span className="d" onClick={() => this.handleClick(props)}>
-            X
+            View
           </span>
         )
       }
@@ -141,7 +141,7 @@ class App extends Component {
     const d = generator(10000)
     return (
       <div className="App">
-        <Table columns={columns} data={d} pagination={10} />
+        <Table columns={columns} data={d} pagination={10} searchPlaceholder="Search" emptyText="No data found :(" />
       </div>
     )
   }

@@ -14,6 +14,8 @@
 #btable table {
   border-collapse: collapse;
   width: 100%;
+  animation: fade-in;
+  animation-duration: 1s;
 }
 
 #btable th,
@@ -33,12 +35,15 @@ td {
 }
 
 .global-search-input {
-  float: right;
-  animation: global-search-input;
+  /* float: right; */
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  animation: fade-in;
   animation-duration: 1s;
 }
 
-@keyframes global-search-input {
+@keyframes fade-in {
   0% {
     opacity: 0;
   }
@@ -52,10 +57,17 @@ td {
 #btable .table-header {
   background: #fafafa;
   padding: 10px;
+  position: relative;
+}
+
+
+#btable .table-header .title {
+  margin: 0px;
 }
 
 #btable thead tr {
   background: #fafafa;
+  /* cursor: pointer; */
 }
 
 #btable .row {
@@ -173,6 +185,14 @@ table {
 #btable .pagination button:active {
   animation: pagination-btn-animation;
   animation-duration: 1s;
+}
+
+#btable .empty-table {
+  padding: 40px;
+  position: relative;
+  /* top: 20px;
+  left: 50%; */
+  text-align: center;
 }
 
 @keyframes pagination-btn-animation {

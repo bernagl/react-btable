@@ -151,7 +151,10 @@ export default class Datatable extends Component {
       handleDelete,
       handleEdit,
       handleView,
-      pagination
+      pagination,
+      emptyText,
+      searchPlaceholder,
+      title
     } = this.props
     const {
       currentData,
@@ -175,12 +178,13 @@ export default class Datatable extends Component {
     return (
       <div id="btable">
         <div className="table-header">
+          <h1 className="title">{title ? title : 'BTable'}</h1>
           <input
             type="text"
             onChange={({ target: { value } }) => this.globalSearch(value)}
             className="global-search-input"
+            placeholder={searchPlaceholder ? searchPlaceholder : 'Search'}
           />
-          <button onClick={this.onSearch}>b</button>
         </div>
         <table>
           <thead>
@@ -204,18 +208,22 @@ export default class Datatable extends Component {
                           className="show-search-input"
                         />
                       )} */}
-                      <span
-                        onClick={() => this.sortColumn(col, 'desc')}
-                        className={`caret caret-up ${i === selectedCol &&
-                          order === 'desc' &&
-                          'active'} `}
-                      />
-                      <span
-                        onClick={() => this.sortColumn(col, 'asc')}
-                        className={`caret caret-down ${i === selectedCol &&
-                          order === 'asc' &&
-                          'active'}`}
-                      />
+                      {col.Render || (
+                        <React.Fragment>
+                          <span
+                            onClick={() => this.sortColumn(col, 'desc')}
+                            className={`caret caret-up ${i === selectedCol &&
+                              order === 'desc' &&
+                              'active'} `}
+                          />
+                          <span
+                            onClick={() => this.sortColumn(col, 'asc')}
+                            className={`caret caret-down ${i === selectedCol &&
+                              order === 'asc' &&
+                              'active'}`}
+                          />
+                        </React.Fragment>
+                      )}
                     </div>
                     {/* <div className="caret-container">
                     </div> */}
@@ -245,35 +253,42 @@ export default class Datatable extends Component {
             ))}
           </tbody>
         </table>
-        <div className="pagination">
-          <button
-            onClick={() => this.handlePaginate(currentPage - 1)}
-            disabled={currentPage - 1 === 0 ? true : false}
-          >
-            {'<'}
-          </button>
-          {/* {Array.from({ length: pages }, (item, i) => (
+        <div className="footer">
+          {currentData.length <= 0 && (
+            <div className="empty-table">
+              {emptyText ? emptyText : 'No data found'}
+            </div>
+          )}
+          <div className="pagination">
             <button
-              onClick={() => this.handlePaginate(i + 1)}
-              disabled={currentPage === i + 1 ? true : false}
+              onClick={() => this.handlePaginate(currentPage - 1)}
+              disabled={currentPage - 1 === 0 ? true : false}
             >
-              {i + 1}
+              {'<'}
+            </button>
+            {/* {Array.from({ length: pages }, (item, i) => (
+            <button
+            onClick={() => this.handlePaginate(i + 1)}
+            disabled={currentPage === i + 1 ? true : false}
+            >
+            {i + 1}
             </button>
           ))} */}
-          <input
-            type="number"
-            value={currentPage}
-            min="1"
-            max={pages}
-            onChange={({ target: { value } }) => this.handlePaginate(value)}
-          />
-          <span className="pagination-total">of {pages}</span>
-          <button
-            onClick={() => this.handlePaginate(currentPage + 1)}
-            disabled={currentPage >= pages ? true : false}
-          >
-            {'>'}
-          </button>
+            <input
+              type="number"
+              value={currentPage}
+              min="1"
+              max={pages}
+              onChange={({ target: { value } }) => this.handlePaginate(value)}
+            />
+            <span className="pagination-total">of {pages}</span>
+            <button
+              onClick={() => this.handlePaginate(currentPage + 1)}
+              disabled={currentPage >= pages ? true : false}
+            >
+              {'>'}
+            </button>
+          </div>
         </div>
       </div>
     )
