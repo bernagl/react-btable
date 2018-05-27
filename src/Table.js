@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-// columns, EmptyText, searchPlaceholder, title
 export default class Datatable extends Component {
   state = {
     selectedCol: 0,
@@ -228,6 +227,7 @@ Datatable.propTypes = {
   data: PropTypes.array.isRequired,
   EmptyText: PropTypes.func,
   Loading: PropTypes.func,
+  pagination: PropTypes.number,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string
 }

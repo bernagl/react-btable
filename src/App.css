@@ -3,9 +3,15 @@
 .App {
   max-width: 860px;
   margin: auto;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-content: center;
+  align-content: center; */
+}
+.App .button-newdata i{
+  font-size: 12px;
+}
+.App .button-newdata button{
+  padding: 10px;
 }
 
 #btable table {
@@ -159,14 +165,14 @@ table {
   cursor: pointer;
 }
 
-#btable .pagination button {
+#btable .pagination button, .App .button-newdata button {
   border: 1px solid #e8e8e8;
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
 }
 
-#btable .pagination button:focus {
+#btable .pagination button:focus, .App .button-newdata button:focus {
   border: 1px solid #e8e8e8;
   border-radius: 5px;
   padding: 5px 10px;

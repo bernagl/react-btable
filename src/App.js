@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
-import Table from './Table'
+// import Table from './Table'
 import generator from './generator'
-// import Rxtable from 'react-xtable'
+import Rxtable from 'react-xtable'
 
 class App extends Component {
   state = { data: [] }
@@ -11,31 +11,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ data: generator(10000) })
-    }, 5000)
+    // setTimeout(() => {
+    this.setState({ data: generator(10000) })
+    // }, 5000)
   }
   render() {
     const columns = [
       {
         label: 'Name',
         key: 'name',
-        Render: props => (
-          <span className="d" onClick={() => this.handleClick(props)}>
-            {props.name}
-          </span>
-        )
-      },
-      {
-        label: 'Last name',
-        key: 'last_name'
+        Render: element => <span className="d">{element.name}</span>
       },
       { label: 'Age', key: 'age' },
       {
         label: 'Actions',
         key: 'actions',
-        Render: props => (
-          <span className="d" onClick={() => this.handleClick(props)}>
+        Render: element => (
+          <span className="d" onClick={() => console.log(element)}>
             View
           </span>
         )
@@ -44,24 +36,28 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Table
+        <Rxtable
           columns={columns}
           data={this.state.data}
-          // Loading={() => 'Loading'}
-          // pagination={10}
-          // searchPlaceholder="Search"
-          // emptyText={() => 'No data found :('}
+          Loading={() => 'Loading'}
+          pagination={10}
+          searchPlaceholder="Search"
+          emptyText={() => 'No data found :('}
         />
-        <button
-          onClick={() => {
-            this.setState({ data: [] })
-            setTimeout(() => {
-              this.setState({ data: generator(100) })
-            }, 2000)
-          }}
-        >
-          New data
-        </button>
+        <div className="button-newdata">
+          <button
+            onClick={() => {
+              this.setState({ data: [] })
+              setTimeout(() => {
+                this.setState({ data: generator(10000) })
+              }, 2000)
+            }}
+          >
+            New data
+          </button>
+          <br />
+          <i>New data with 2s cooldown</i>
+        </div>
       </div>
     )
   }
