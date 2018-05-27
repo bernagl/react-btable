@@ -4,8 +4,8 @@ import Table from './Table'
 import generator from './generator'
 
 class App extends Component {
-  handleClick = ({ nombre, apellido, edad }) => {
-    alert(`${nombre} ${apellido} ${edad}`)
+  handleClick = ({ name, last_name, age }) => {
+    alert(`${name} ${last_name} ${age}`)
   }
 
   render() {
@@ -42,7 +42,7 @@ class App extends Component {
           data={d}
           pagination={10}
           searchPlaceholder="Search"
-          emptyText="No data found :("
+          emptyText={() => 'No data found :('}
         />
       </div>
     )

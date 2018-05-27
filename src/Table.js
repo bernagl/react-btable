@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
+// columns, EmptyText, searchPlaceholder, title
 export default class Datatable extends Component {
   state = {
     selectedCol: 0,
@@ -95,7 +97,7 @@ export default class Datatable extends Component {
   }
 
   render() {
-    const { columns, emptyText, searchPlaceholder, title } = this.props
+    const { columns, EmptyText, searchPlaceholder, title } = this.props
     const { currentData, currentPage, pages, selectedCol, order } = this.state
     return (
       <div id="btable">
@@ -112,11 +114,11 @@ export default class Datatable extends Component {
           <thead>
             <tr>
               {columns.map((col, i) => (
-                <th onClick={() => this.setSelectedCol(i)}  key={i}>
+                <th onClick={() => this.setSelectedCol(i)} key={i}>
                   <div className="header-container">
                     <span>{col.label}</span>
                     <br />
-                    {col.Render || (
+                    {!col.Render && (
                       <React.Fragment>
                         <span
                           onClick={() => this.sortColumn(col, 'desc')}
@@ -152,9 +154,10 @@ export default class Datatable extends Component {
         <div className="footer">
           {currentData.length <= 0 && (
             <div className="empty-table">
-              {emptyText ? emptyText : 'No data found'}
+              <span>{EmptyText ? <EmptyText /> : 'No data found'}</span>
             </div>
           )}
+          {/* {1 > 2 && <span>si es mayor</span>} */}
           <div className="pagination">
             <button
               onClick={() => this.handlePaginate(currentPage - 1)}
@@ -181,4 +184,19 @@ export default class Datatable extends Component {
       </div>
     )
   }
+}
+
+Datatable.propTypes = {
+  columns: PropTypes.arrayOf(
+    PropTypes.object
+    // Of({
+    //   label: PropTypes.string.isRequired,
+    //   key: PropTypes.string.isRequired,
+    //   Render: PropTypes.func
+    // })
+  ).isRequired,
+  data: PropTypes.array.isRequired,
+  EmptyText: PropTypes.func,
+  searchPlaceholder: PropTypes.string,
+  title: PropTypes.string
 }
