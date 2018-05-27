@@ -211,6 +211,7 @@ Datatable.propTypes = {
   ).isRequired,
   data: PropTypes.array.isRequired,
   EmptyText: PropTypes.func,
+  Loading: PropTypes.func,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string
 }
