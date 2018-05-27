@@ -134,6 +134,56 @@ table {
   width: 100px;
 }
 
+#btable .pagination {
+  text-align: center;
+  padding: 10px;
+  background: #fafafa;
+}
+
+#btable .pagination input {
+  border: 1px solid #e8e8e8;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#btable .pagination .pagination-total {
+  border-radius: 5px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+#btable .pagination button {
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#btable .pagination button:focus {
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  padding: 5px 10px;
+  outline: none;
+  animation: pagination-btn-animation;
+  animation-duration: 1s;
+}
+
+#btable .pagination button:active {
+  animation: pagination-btn-animation;
+  animation-duration: 1s;
+}
+
+@keyframes pagination-btn-animation {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 @keyframes caret-active-up {
   from {
     transform: scale(1.5)

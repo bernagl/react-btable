@@ -267,7 +267,7 @@ export default class Datatable extends Component {
             max={pages}
             onChange={({ target: { value } }) => this.handlePaginate(value)}
           />
-          <span>of {pages}</span>
+          <span className="pagination-total">of {pages}</span>
           <button
             onClick={() => this.handlePaginate(currentPage + 1)}
             disabled={currentPage >= pages ? true : false}
