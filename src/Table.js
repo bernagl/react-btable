@@ -15,7 +15,15 @@ export default class Datatable extends Component {
   }
 
   componentDidMount() {
-    const { columns, data, pagination } = this.props
+    this.setDataToState(this.props)
+  }
+
+  componentWillReceiveProps(props) {
+    props.data !== this.props.data && this.setDataToState(props)
+  }
+
+  setDataToState = props => {
+    const { columns, data, pagination } = props
     const searchData = data.map(element => {
       let el = ''
       columns.map(col => (el += ` ${element[col.key]}`))
