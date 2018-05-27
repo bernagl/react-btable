@@ -51,16 +51,18 @@ export default class Datatable extends Component {
     })
   }
 
-  sortColumn = ({ key }, o) => {
-    const { result: r, order: so } = this.state
+  sortColumn = ({ key }, o, i) => {
+    const { result: r, order: so, selectedCol: sl } = this.state
     const { data } = this.props
+    // const order = sl ? i === sl && (o === so ? null : o) : o
+    const order = sl === i ? (o === so ? null : o) : o
     const result =
       o === so
         ? [...data]
         : o === 'desc'
           ? r.sort((a, b) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0))
           : r.sort((a, b) => (a[key] < b[key] ? 1 : a[key] > b[key] ? -1 : 0))
-    this.stateMiddleware({ result, order: o === so ? null : o, currentPage: 1 })
+    this.stateMiddleware({ result, order, currentPage: 1, selectedCol: i })
   }
 
   searchByColum = text => {
@@ -121,13 +123,13 @@ export default class Datatable extends Component {
                     {!col.Render && (
                       <React.Fragment>
                         <span
-                          onClick={() => this.sortColumn(col, 'desc')}
+                          onClick={() => this.sortColumn(col, 'desc', i)}
                           className={`caret caret-up ${i === selectedCol &&
                             order === 'desc' &&
                             'active'} `}
                         />
                         <span
-                          onClick={() => this.sortColumn(col, 'asc')}
+                          onClick={() => this.sortColumn(col, 'asc', i)}
                           className={`caret caret-down ${i === selectedCol &&
                             order === 'asc' &&
                             'active'}`}
