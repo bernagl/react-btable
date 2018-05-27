@@ -118,12 +118,12 @@ export default class Datatable extends Component {
     return (
       <div id="btable">
         <div className="table-header">
-          <h1 className="title">{title ? title : 'BTable'}</h1>
+          <h1 className="title">{title}</h1>
           <input
             type="text"
             onChange={({ target: { value } }) => this.globalSearch(value)}
             className="global-search-input"
-            placeholder={searchPlaceholder ? searchPlaceholder : 'Search'}
+            placeholder={searchPlaceholder}
           />
         </div>
         <table>
@@ -171,7 +171,7 @@ export default class Datatable extends Component {
           {currentData.length <= 0 &&
             !Loading && (
               <div className="empty-table">
-                <span>{EmptyText ? <EmptyText /> : 'No data found'}</span>
+                <EmptyText />
               </div>
             )}
           {Loading &&
@@ -206,6 +206,14 @@ export default class Datatable extends Component {
       </div>
     )
   }
+}
+
+Datatable.defaultProps = {
+  EmptyText: () => <span>No data found</span>,
+  Loading: () => <span>Loading</span>,
+  pagination: 50,
+  searchPlaceholder: 'Searchsss',
+  title: 'Datatable'
 }
 
 Datatable.propTypes = {

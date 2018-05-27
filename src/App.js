@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import Table from './Table'
 import generator from './generator'
+// import Rxtable from 'react-xtable'
 
 class App extends Component {
   state = { data: [] }
@@ -46,10 +47,10 @@ class App extends Component {
         <Table
           columns={columns}
           data={this.state.data}
-          Loading={() => 'Loading'}
-          pagination={10}
-          searchPlaceholder="Search"
-          emptyText={() => 'No data found :('}
+          // Loading={() => 'Loading'}
+          // pagination={10}
+          // searchPlaceholder="Search"
+          // emptyText={() => 'No data found :('}
         />
         <button
           onClick={() => {
